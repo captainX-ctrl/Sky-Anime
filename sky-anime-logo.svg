@@ -1,0 +1,251 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 200" width="400" height="200">
+  <defs>
+    <!-- Main gradient blue to purple -->
+    <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b5cf6;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Glow gradient for eye -->
+    <linearGradient id="eyeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#93c5fd;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c4b5fd;stop-opacity:1" />
+    </linearGradient>
+
+    <!-- Cloud glow filter -->
+    <filter id="cloudGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+
+    <!-- Soft outer glow -->
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feColorMatrix in="blur" type="matrix"
+        values="0 0 0 0 0.231
+                0 0 0 0 0.510
+                0 0 0 0 0.965
+                0 0 0 0.6 0" result="colorBlur"/>
+      <feMerge>
+        <feMergeNode in="colorBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Star sparkle filter -->
+    <filter id="starGlow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Clip path for eye inside cloud -->
+    <clipPath id="cloudClip">
+      <path d="
+        M 68,85
+        Q 55,85 52,75
+        Q 40,76 38,65
+        Q 28,64 28,54
+        Q 28,44 40,42
+        Q 42,32 54,32
+        Q 60,24 72,26
+        Q 80,18 92,22
+        Q 104,16 112,26
+        Q 124,22 128,34
+        Q 138,36 138,48
+        Q 148,52 144,64
+        Q 142,74 130,76
+        Q 128,86 114,86
+        Z
+      "/>
+    </clipPath>
+
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#60a5fa"/>
+      <stop offset="50%" style="stop-color:#a78bfa"/>
+      <stop offset="100%" style="stop-color:#c084fc"/>
+    </linearGradient>
+
+    <!-- Iris gradient -->
+    <radialGradient id="irisGrad" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" style="stop-color:#93c5fd"/>
+      <stop offset="60%" style="stop-color:#3b82f6"/>
+      <stop offset="100%" style="stop-color:#1e3a8a"/>
+    </radialGradient>
+
+    <!-- Pupil gradient -->
+    <radialGradient id="pupilGrad" cx="40%" cy="35%" r="60%">
+      <stop offset="0%" style="stop-color:#1e1b4b"/>
+      <stop offset="100%" style="stop-color:#0a0a1a"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Dark background -->
+  <rect width="400" height="200" fill="#0a0a18" rx="16"/>
+
+  <!-- Background subtle stars -->
+  <circle cx="20" cy="20" r="1" fill="#6366f1" opacity="0.5"/>
+  <circle cx="350" cy="30" r="1.2" fill="#818cf8" opacity="0.4"/>
+  <circle cx="380" cy="90" r="0.8" fill="#60a5fa" opacity="0.5"/>
+  <circle cx="15" cy="140" r="1" fill="#a78bfa" opacity="0.4"/>
+  <circle cx="370" cy="160" r="1.5" fill="#6366f1" opacity="0.3"/>
+  <circle cx="330" cy="15" r="0.8" fill="#93c5fd" opacity="0.5"/>
+
+  <!-- ===== CLOUD SHAPE ===== -->
+  <g filter="url(#softGlow)">
+    <!-- Cloud shadow/depth layer -->
+    <path d="
+      M 70,89
+      Q 56,89 53,78
+      Q 41,79 38,68
+      Q 27,67 27,56
+      Q 27,45 40,43
+      Q 42,32 55,32
+      Q 61,23 74,27
+      Q 82,18 95,23
+      Q 108,17 116,27
+      Q 129,23 133,36
+      Q 143,38 144,51
+      Q 154,55 150,68
+      Q 147,78 134,80
+      Q 131,89 116,89
+      Z
+    " fill="#1e1b4b" opacity="0.6"/>
+
+    <!-- Main cloud body -->
+    <path d="
+      M 68,85
+      Q 55,85 52,75
+      Q 40,76 38,65
+      Q 28,64 28,54
+      Q 28,44 40,42
+      Q 42,32 54,32
+      Q 60,24 72,26
+      Q 80,18 92,22
+      Q 104,16 112,26
+      Q 124,22 128,34
+      Q 138,36 138,48
+      Q 148,52 144,64
+      Q 142,74 130,76
+      Q 128,86 114,86
+      Z
+    " fill="url(#mainGrad)" opacity="0.95"/>
+
+    <!-- Cloud highlight/shine -->
+    <path d="
+      M 68,35
+      Q 78,26 92,28
+      Q 105,22 113,30
+      Q 100,24 88,26
+      Q 76,26 68,35
+      Z
+    " fill="white" opacity="0.15"/>
+  </g>
+
+  <!-- ===== ANIME EYE INSIDE CLOUD ===== -->
+  <g clip-path="url(#cloudClip)">
+    <!-- Eye white background area -->
+    <ellipse cx="88" cy="57" rx="32" ry="20" fill="#e0f2fe" opacity="0.95"/>
+
+    <!-- Upper eyelid curve (dark, anime style) -->
+    <path d="M 56,57 Q 72,35 88,36 Q 104,35 120,57" 
+          fill="#1e1b4b" stroke="none"/>
+
+    <!-- Iris -->
+    <circle cx="88" cy="57" r="16" fill="url(#irisGrad)"/>
+
+    <!-- Iris detail rings -->
+    <circle cx="88" cy="57" r="16" fill="none" stroke="#60a5fa" stroke-width="1" opacity="0.5"/>
+    <circle cx="88" cy="57" r="12" fill="none" stroke="#3b82f6" stroke-width="0.5" opacity="0.4"/>
+
+    <!-- Pupil -->
+    <circle cx="88" cy="57" r="9" fill="url(#pupilGrad)"/>
+
+    <!-- Eye sparkle/highlight (anime style - large) -->
+    <ellipse cx="82" cy="51" rx="4" ry="5" fill="white" opacity="0.9" transform="rotate(-15, 82, 51)"/>
+    <!-- Small sparkle -->
+    <circle cx="94" cy="62" r="2" fill="white" opacity="0.6"/>
+
+    <!-- Lower lash line -->
+    <path d="M 60,63 Q 88,74 116,63" 
+          fill="none" stroke="#1e3a8a" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+
+    <!-- Upper lash line (thick anime style) -->
+    <path d="M 56,57 Q 72,36 88,36 Q 104,36 120,57" 
+          fill="none" stroke="#0f0f2e" stroke-width="4" stroke-linecap="round"/>
+
+    <!-- Lash details -->
+    <line x1="60" y1="55" x2="57" y2="47" stroke="#0f0f2e" stroke-width="2" stroke-linecap="round"/>
+    <line x1="68" y1="46" x2="66" y2="38" stroke="#0f0f2e" stroke-width="2" stroke-linecap="round"/>
+    <line x1="88" y1="37" x2="88" y2="29" stroke="#0f0f2e" stroke-width="2" stroke-linecap="round"/>
+    <line x1="108" y1="46" x2="110" y2="38" stroke="#0f0f2e" stroke-width="2" stroke-linecap="round"/>
+    <line x1="116" y1="55" x2="119" y2="47" stroke="#0f0f2e" stroke-width="2" stroke-linecap="round"/>
+  </g>
+
+  <!-- ===== STARS around cloud ===== -->
+  <!-- Star 1 - top right of cloud -->
+  <g filter="url(#starGlow)" transform="translate(128, 20)">
+    <polygon points="0,-7 1.7,-2.3 6.6,-2.3 2.7,0.9 4.1,5.7 0,3 -4.1,5.7 -2.7,0.9 -6.6,-2.3 -1.7,-2.3"
+             fill="url(#eyeGrad)" opacity="0.9"/>
+  </g>
+
+  <!-- Star 2 - small, bottom left cloud area -->
+  <g filter="url(#starGlow)" transform="translate(38, 82)">
+    <polygon points="0,-5 1.2,-1.6 4.8,-1.6 1.9,0.6 2.9,4.1 0,2.2 -2.9,4.1 -1.9,0.6 -4.8,-1.6 -1.2,-1.6"
+             fill="#c4b5fd" opacity="0.8"/>
+  </g>
+
+  <!-- Star 3 - tiny top left -->
+  <g filter="url(#starGlow)" transform="translate(55, 14)">
+    <polygon points="0,-4 0.9,-1.2 3.8,-1.2 1.5,0.5 2.3,3.2 0,1.7 -2.3,3.2 -1.5,0.5 -3.8,-1.2 -0.9,-1.2"
+             fill="#93c5fd" opacity="0.7"/>
+  </g>
+
+  <!-- ===== TEXT: Sky Anime ===== -->
+  <!-- Subtle glow under text -->
+  <text x="175" y="65" 
+        font-family="'Trebuchet MS', 'Segoe UI', sans-serif"
+        font-size="42"
+        font-weight="900"
+        fill="#3b82f6"
+        opacity="0.15"
+        filter="url(#softGlow)"
+        letter-spacing="1">Sky</text>
+
+  <!-- Main "Sky" text -->
+  <text x="172" y="63" 
+        font-family="'Trebuchet MS', 'Segoe UI', sans-serif"
+        font-size="42"
+        font-weight="900"
+        fill="url(#textGrad)"
+        letter-spacing="1">Sky</text>
+
+  <!-- "Anime" text -->
+  <text x="172" y="100"
+        font-family="'Trebuchet MS', 'Segoe UI', sans-serif"
+        font-size="28"
+        font-weight="300"
+        fill="url(#textGrad)"
+        letter-spacing="8"
+        opacity="0.9">ANIME</text>
+
+  <!-- Decorative line under text -->
+  <line x1="172" y1="110" x2="310" y2="110" 
+        stroke="url(#mainGrad)" stroke-width="1.5" opacity="0.6"/>
+
+  <!-- Dot decoration -->
+  <circle cx="318" cy="110" r="2.5" fill="#8b5cf6" opacity="0.7"/>
+  <circle cx="326" cy="110" r="1.5" fill="#6366f1" opacity="0.5"/>
+
+  <!-- Tagline / subtitle -->
+  <text x="172" y="130"
+        font-family="'Trebuchet MS', 'Segoe UI', sans-serif"
+        font-size="10"
+        font-weight="400"
+        fill="#60a5fa"
+        letter-spacing="3"
+        opacity="0.6">アニメの世界</text>
+
+</svg>
